@@ -116,8 +116,8 @@ def import_obj(filepath):
 # Main Loop: Process Folder
 # ---------------------------
 
-input_folder = "D:/Fatima/AUB/EECE 490/Project/sample_data"
-output_csv = "D:/Fatima/AUB/EECE 490/Project/polyp_intersection_results.csv"
+input_folder = "data/sample_data"
+output_csv = "data/annotations/sample_polyp_intersection_results.csv"
 results = []
 
 for filename in os.listdir(input_folder):
