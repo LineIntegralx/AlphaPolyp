@@ -16,14 +16,14 @@ This labeling system is designed to automatically measure the **size** and **vol
 
 ### 🛠️ How to Run the Labeling Script
 
-To use this script, ensure you have [Blender](https://www.blender.org/download/) installed (tested with **Blender 3.x**) and that your `.obj` files are located inside the `data/sample_data/` directory.
+To use this script, ensure you have [Blender](https://www.blender.org/download/) installed (tested with **Blender 3.x**) and that your `.obj` files are located inside the `data/sample_data/mesh` directory.
 
 #### ✅ Steps:
 
 1. **Open Blender**.
 2. Navigate to the **Scripting** workspace.
 3. Click **Open** and select the script: `labeling/label_polyp_data.py`.
-4. **Important**: You must run Blender from the **project’s root folder** (the one containing `data/` and `labeling/`) so that relative paths like `data/sample_data/mesh/` work properly.
+4. **Important**: You must run Blender from the **project’s root folder** (the one containing `data/` and `labeling/`) so that relative paths like `data/sample_data/` work properly.
 
    **To do this:**
    - On **Windows**: Right-click the project folder → choose **"Open in Terminal"** → type `blender` and press Enter.
