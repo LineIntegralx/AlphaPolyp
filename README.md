@@ -23,7 +23,7 @@ To use this script, ensure you have [Blender](https://www.blender.org/download/)
 1. **Open Blender**.
 2. Navigate to the **Scripting** workspace.
 3. Click **Open** and select the script: `labeling/label_polyp_data.py`.
-4. **Important**: You must run Blender from the **project’s root folder** (the one containing `data/` and `labeling/`) so that relative paths like `data/sample_data/` work properly.
+4. **Important**: You must run Blender from the **project’s root folder** (the one containing `data/` and `labeling/`) so that relative paths like `data/sample_data/mesh` work properly.
 
    **To do this:**
    - On **Windows**: Right-click the project folder → choose **"Open in Terminal"** → type `blender` and press Enter.
