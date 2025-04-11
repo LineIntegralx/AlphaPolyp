@@ -116,8 +116,12 @@ def import_obj(filepath):
 # Main Loop: Process Folder
 # ---------------------------
 
-input_folder = "data/sample_data"
-output_csv = "data/annotations/sample_polyp_intersection_results.csv"
+# Get the directory of the currently open Blender file (the .blend file or script)
+project_root = os.path.dirname(os.path.dirname(bpy.data.filepath))
+
+# Define input/output folders relative to that
+input_folder = os.path.join(project_root, "data", "sample_data", "mesh")
+output_csv = os.path.join(project_root, "data", "annotations", "sample_polyp_intersection_results.csv")
 results = []
 
 for filename in os.listdir(input_folder):
