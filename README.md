@@ -47,4 +47,7 @@ You can run the labeling in **one of two ways**:
 
 The script will:
 - Process all `.obj` files in `data/sample_data/meshes/`
-- Save the results to:  
+- Save the results to:  `data/annotations/sample_polyp_intersection_results.csv`
+
+
+⚠️ **Important**: Make sure you open either the `.blend` file or the `.py` file from the **project root folder** (`AlphaPolyp/`) to ensure the paths work correctly.
