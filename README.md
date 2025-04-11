@@ -18,15 +18,33 @@ This labeling system is designed to automatically measure the **size** and **vol
 
 To use this script, ensure you have [Blender](https://www.blender.org/download/) installed (tested with **Blender 3.x**) and that your `.obj` files are located inside the `data/sample_data/mesh` directory.
 
-#### ✅ Steps:
 
-1. **Open Blender**.
-2. Navigate to the **Scripting** workspace.
-3. Click **Open** and select the script: `labeling/label_polyp_data.py`.
-4. **Important**: You must run Blender from the **project’s root folder** (the one containing `data/` and `labeling/`) so that relative paths like `data/sample_data/` work properly.
+You can run the labeling in **one of two ways**:
 
-   **To do this:**
-   - On **Windows**: Right-click the project folder → choose **"Open in Terminal"** → type `blender` and press Enter.
-   - On **macOS/Linux**: Open Terminal, `cd` into the project folder, and run `blender`.
+---
 
-5. Once inside Blender, with the script open, click **Run Script** to begin processing your `.obj` files.
+### 🟠 Option 1: Run Using the `.blend` File
+
+1. Open **Blender**.
+2. Click **Open**, then select the file:  
+   `label_polyp_data.blend` (located in the `AlphaPolyp/` main folder).
+3. Go to the **Scripting** workspace.
+4. Click **Run Script** to process the `.obj` files.
+
+---
+
+### 🔵 Option 2: Run Using the Python Script Directly
+
+1. Open **Blender**.
+2. Go to the **Scripting** workspace.
+3. Click **Open**, and select the Python script:  
+   `labeling/label_polyp_data.py`
+4. Click **Run Script** to start processing.
+
+---
+
+### 📁 Output
+
+The script will:
+- Process all `.obj` files in `data/sample_data/meshes/`
+- Save the results to:  
