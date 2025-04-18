@@ -1,0 +1,8 @@
+tensorflow>=2.9.0,<2.13.0
+tensorflow-addons
+keras-cv-attention-models
+albumentations
+scikit-learn
+numpy
+opencv-python
+tqdm
