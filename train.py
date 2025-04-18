@@ -15,7 +15,7 @@ real_img_dir  = os.path.join(drive_base, 'cyclegan_images')
 real_mask_dir = os.path.join(drive_base, 'masks')
 synth_img_dir  = os.path.join(drive_base, 'images')
 synth_mask_dir = os.path.join(drive_base, 'masks')
-csv_labels     = 'cleaned_labels.csv'        # CSV with columns: Filename,Volume,x,y,z
+csv_labels     = '/content/AlphaPolyp/data/annotations/cleaned_labels'        # CSV with columns: Filename,Volume,x,y,z
 
 img_size       = 500
 filters        = 17
