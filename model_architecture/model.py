@@ -3,7 +3,7 @@ from keras.layers import Conv2D, UpSampling2D, AveragePooling2D, GlobalAveragePo
 from keras.layers import add
 from keras.models import Model
 from keras_cv_attention_models import caformer
-from CustomLayers.RAPU_blocks import resnet_block, RAPU, convf_bn_act, SBA 
+from model_architecture.RAPU_blocks import resnet_block, RAPU, convf_bn_act, SBA 
 
 kernel_initializer = 'he_uniform'
 interpolation = "nearest"

@@ -5,9 +5,9 @@ from sklearn.model_selection import train_test_split
 from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard, ReduceLROnPlateau
 from tensorflow_addons.optimizers import AdamW
 
-from ModelArchitecture.DiceLoss import dice_metric_loss
-from ModelArchitecture.RAPUNet   import create_model
-from CustomLayers.ImageLoader2D  import load_images_masks_from_drive
+from model_architecture.DiceLoss import dice_metric_loss
+from model_architecture.Model   import create_model
+from model_architecture.ImageLoader2D  import load_images_masks_from_drive
 
 # ── 1) USER CONFIG —————————————————————————————————————————————————————————
 drive_base     = '/content/drive/MyDrive/extracted_folder/synth-colon'
