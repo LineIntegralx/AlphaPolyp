@@ -35,7 +35,7 @@ os.makedirs(log_root, exist_ok=True)
 
 # ── 2) READ REGRESSION LABEL CSV ———————————————————————————————————————————————
 label_map = {}
-with open(csv_labels, newline='') as f:
+with open(csv_labels, newline='', encoding='utf-8-sig') as f:
     for row in csv.DictReader(f):
         label_map[row['Filename']] = [
             float(row['Volume']),
