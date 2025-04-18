@@ -16,7 +16,7 @@ def load_images_masks_from_drive(img_dir, mask_dir, img_size):
     Y = []
     for fname in tqdm(file_list):
         img_path = os.path.join(img_dir, fname)
-        mask_name = os.path.splitext(fname)[0] + '_mask.png'
+        mask_name = os.path.splitext(fname)[0] + '.png'
         mask_path = os.path.join(mask_dir, mask_name)
         if not os.path.exists(mask_path):
             print(f"Warning: mask missing for {fname}")
