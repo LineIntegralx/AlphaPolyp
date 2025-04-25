@@ -22,7 +22,7 @@ filters        = 17
 batch_size     = 8
 seed           = 58800
 
-# how many epochs for each phase (tune as needed)
+# how many epochs for each phase             
 epochs_phase1  = 15  # head-only
 epochs_phase2  = 30  # fine-tune all
 
