@@ -9,7 +9,38 @@ In clinical workflow this eliminates the extra CT‑colonography step currently 
 
 
 ---
+<<<<<<< HEAD
 ## 
+=======
+
+## System Architecture & Data Flow
+
+### Front‑End
+
+- **Next.js** – Renders UI components, handles routing, and manages user interactions.
+- **Tailwind CSS** – Utility‑first CSS framework for styling and responsive design.
+- **Custom Components** – Built with React and **shadcn/ui** for modularity and reusability.
+- **TypeScript** – Ensures type safety and an improved developer experience.
+
+### Back‑End
+
+- **Flask** – Serves as the main REST API server, handling requests and responses.
+- **TensorFlow / Keras** – Runs the custom CNN model for polyp detection.
+- **Model Weights** – Stored in `alphapolyp_optimized_model_3500cases.h5`.
+- **Utilities** – Pre‑processing and post‑processing functions for image analysis.
+- **REST API** – Exposes endpoints for image upload, analysis, and model information.
+
+### Data Flow
+
+1. **Image Upload** – User uploads an image via the frontend UI.
+2. **API Request** – Frontend sends the image to the backend `/api/analyze` endpoint.
+3. **Processing** – Backend preprocesses the image, runs inference with the ML model, and post‑processes the results.
+4. **Response** – Backend returns analysis results (detected polyps, volume estimation and dimensions) to the frontend.
+5. **Display** – Frontend visualizes results, highlights polyps, and provides user feedback.
+
+---
+
+>>>>>>> a199b54c9394067f7bde0385f5968ab4d01df79d
 ## Dataset
 
 - **Source:** Synthetic Colon Polyp CT & Colonoscopy Images (Mendeley Data, v1)  
