@@ -65,8 +65,7 @@ sudo docker run
    - `scikit-learn`
    - `tqdm`
    - `pillow ` 
- 
-   ```
+
 
 ---
 ## Usage
