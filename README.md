@@ -1,10 +1,11 @@
 # AlphaPolyp
-![logo] (https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png)
+
+![logo](https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png)
 
 
 # Google Drive Link 
 The link below contains:
-- The full dataset in /extracted_folder/syth-colon 
+- The full dataset in /extracted_folder/syth-colon https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png
 - The powerpoint presentation 
 - The demo 
 - The model's weights 
