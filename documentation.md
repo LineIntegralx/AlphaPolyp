@@ -6,6 +6,7 @@ This document provides a comprehensive technical overview of AlphaPolyp, serving
 
 AlphaPolyp is an AI assistant that automatically segments colorectal polyps in colonoscopy frames _and_ estimates their 3‑D morphology (overall volume + orthogonal diameters x, y, z).  
 In clinical workflow this eliminates the extra CT‑colonography step currently required to size a lesion and helps the endoscopist select an appropriately sized polypectomy snare on the spot.
+
 ---
 
 ## System Architecture & Data Flow
