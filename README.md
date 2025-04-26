@@ -1,5 +1,5 @@
 # AlphaPolyp
-![logo]https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png
+![logo] (https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png)
 
 
 # Google Drive Link 
