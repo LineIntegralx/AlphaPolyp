@@ -1,5 +1,70 @@
 # AlphaPolyp
 
+
+# Docker: Building and Running
+
+## 1. General Instructions
+
+### Build the Docker Image
+```bash
+docker build --platform linux/amd64 -t my-streamlit-app .
+```
+
+### Run the Docker Container
+```bash
+docker run --env-file .env -p 8501:8501 my-streamlit-app
+```
+
+---
+
+### Build the Docker Image
+```bash
+sudo docker build -t my-streamlit-app .
+```
+
+### Run the Docker Container
+```bash
+sudo docker run --env-file .env -p 8501:8501 my-streamlit-app
+```
+
+
+## Overview
+![image](https://github.com/)
+
+
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/yourrepo.git
+   cd yourrepo
+   ```
+
+2. **Install Dependencies**:
+   It’s recommended to use a virtual environment:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   Required Python packages include:
+   - `tensorflow`
+   - `tensorflow-addons`
+   - `keras-cv-attention-models`
+   - `albumentations`
+   - `OpenAI` 
+   - `numpy`
+   - `opencv`
+   - `scikit-learn`
+   - `tqdm`
+   - `pillow ` 
+ 
+   ```
+
+
+
+---
+## Usage
+
+
 ## 🏷️ Labeling System (Using Blender)
 
 ### 💡 Overview

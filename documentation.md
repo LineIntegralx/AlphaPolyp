@@ -9,7 +9,7 @@ In clinical workflow this eliminates the extra CT‑colonography step currently 
 
 
 ---
-
+## 
 ## Dataset
 
 - **Source:** Synthetic Colon Polyp CT & Colonoscopy Images (Mendeley Data, v1)  
