@@ -1,5 +1,14 @@
 # AlphaPolyp
+![logo]https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png
 
+
+# Google Drive Link 
+The link below contains:
+- The full dataset in /extracted_folder/syth-colon 
+- The powerpoint presentation 
+- The demo 
+- The model's weights 
+<https://drive.google.com/drive/folders/1NARp2kYtM5-aD8gHWHypCNpK98rDFR7-?usp=sharing>
 
 # Docker: Building and Running
 
@@ -7,24 +16,24 @@
 
 ### Build the Docker Image
 ```bash
-docker build --platform linux/amd64 -t my-streamlit-app .
+docker build  
 ```
 
 ### Run the Docker Container
 ```bash
-docker run --env-file .env -p 8501:8501 my-streamlit-app
+docker run 
 ```
 
 ---
 
 ### Build the Docker Image
 ```bash
-sudo docker build -t my-streamlit-app .
+sudo docker build 
 ```
 
 ### Run the Docker Container
 ```bash
-sudo docker run --env-file .env -p 8501:8501 my-streamlit-app
+sudo docker run 
 ```
 
 
@@ -59,10 +68,28 @@ sudo docker run --env-file .env -p 8501:8501 my-streamlit-app
  
    ```
 
-
-
 ---
 ## Usage
+
+1. **Upload an Image**
+   - On the main page, click on the Browse Files button or drag and drop an endoscopy image into the upload area. 
+   - Supported formats: JPG, PNG, JPEG. 
+
+2. **Analyze the Image**
+   - After uploading, click the Analyze Image button. 
+   - The system will process the image and run the polyp segmentation and volume estimation model. 
+
+3. **View Results**
+   - Once analysis is complete, results will be shown:
+   - The uploaded image and a segmented version of it. 
+   - The estimated volume in mm^3 along with the estimated x,y and z dimensions
+
+4. **Analyze Another Image**
+   - To analyze a new image, click the Analyze Another Image button and repeat the upload process.  
+
+5. **Download Report**
+   - After analysis, click the Save Result button. 
+   - A PDF report containing the analysis result, highlighted image will be generated to be downloaded on your device.
 
 
 ## 🏷️ Labeling System (Using Blender)
