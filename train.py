@@ -6,34 +6,42 @@ from keras.callbacks import CSVLogger, ModelCheckpoint, TensorBoard, ReduceLROnP
 from tensorflow_addons.optimizers import AdamW
 
 from model_architecture.DiceLoss import dice_metric_loss
-from model_architecture.Model   import create_model
+from model_architecture.model   import create_model
 from model_architecture.ImageLoader2D  import load_images_masks_from_drive
 
-# ── 1) USER CONFIG —————————————————————————————————————————————————————————
-drive_base     = '/content/drive/MyDrive/extracted_folder/synth-colon'
+
+drive_base     = 'G:\My Drive\extracted_folder\synth-colon'
 real_img_dir  = os.path.join(drive_base, 'cyclegan_images')
 real_mask_dir = os.path.join(drive_base, 'masks')
 synth_img_dir  = os.path.join(drive_base, 'images')
 synth_mask_dir = os.path.join(drive_base, 'masks')
-csv_labels     = '/content/AlphaPolyp/data/annotations/cleaned_labels.csv'        # CSV with columns: Filename,Volume,x,y,z
+csv_labels     = 'cleaned_labels.csv'        
 
 img_size       = 500
 filters        = 17
 batch_size     = 8
 seed           = 58800
 
-# how many epochs for each phase             
-epochs_phase1  = 15  # head-only
-epochs_phase2  = 30  # fine-tune all
+"""
+How many epochs for each phase 
+epochs_phase1  for regression head only
+epochs_phase2  to fine-tune all
+"""
 
-# path to your pretrained RAPUNet checkpoint (segmentation only)
+epochs_phase1  = 15  
+epochs_phase2  = 30  
+
+"""
+This is the path to the pretrained 
+RAPUNet checkpoint (segmentation only)
+"""
+
 pretrained_ckpt = 'rapunet_pretrained.h5'
 
 log_root       = './logs'
 os.makedirs(log_root, exist_ok=True)
 
 
-# ── 2) READ REGRESSION LABEL CSV ———————————————————————————————————————————————
 label_map = {}
 with open(csv_labels, newline='', encoding='utf-8-sig') as f:
     for row in csv.DictReader(f):
@@ -50,13 +58,27 @@ def get_reg_labels(file_list):
     for fname in file_list:
         base    = os.path.splitext(fname)[0]        
         csv_key = f"{base}_labeled.obj"             
-        regs.append(label_map.get(csv_key, [0.0,0.0,0.0,0.0]))
+        regs.append(label_map[csv_key])
     return np.array(regs, dtype=np.float32)
 
+label_keys = set(label_map.keys())
+def filter_labeled(img_dir):
+    """
+    Return sorted list of filenames in img_dir whose
+    base+'_labeled.obj' is in label_map.
+    """
+    out = []
+    for fn in os.listdir(img_dir):
+        if not fn.lower().endswith(('.jpg','.png','.jpeg')): 
+            continue
+        base = os.path.splitext(fn)[0]             
+        key  = f"{base}_labeled.obj"              
+        if key in label_keys:
+            out.append(fn)
+    return sorted(out)
 
-# ── 3) LOAD REAL & SYNTHETIC IMAGES + MASKS ——————————————————————————————
-real_files  = sorted(os.listdir(real_img_dir))
-synth_files = sorted(os.listdir(synth_img_dir))
+real_files  = filter_labeled(os.listdir(real_img_dir))
+synth_files = filter_labeled(os.listdir(synth_img_dir))
 
 X_real,  Y_real_mask  = load_images_masks_from_drive(real_img_dir,  real_mask_dir,  img_size)
 X_synth, Y_synth_mask = load_images_masks_from_drive(synth_img_dir, synth_mask_dir, img_size)
@@ -64,15 +86,13 @@ X_synth, Y_synth_mask = load_images_masks_from_drive(synth_img_dir, synth_mask_d
 Y_real_reg  = get_reg_labels(real_files)
 Y_synth_reg = get_reg_labels(synth_files)
 
-
-# ── 4) INTERLEAVE REAL ↔ SYNTHETIC ——————————————————————————————————————————
 def interleave(X1, M1, R1, X2, M2, R2):
     Xc, Mc, Rc = [], [], []
     n = min(len(X1), len(X2))
     for i in range(n):
         Xc.append(X1[i]); Mc.append(M1[i]); Rc.append(R1[i])
         Xc.append(X2[i]); Mc.append(M2[i]); Rc.append(R2[i])
-    # append any leftovers
+    
     if len(X1) > n:
         Xc.extend(X1[n:]); Mc.extend(M1[n:]); Rc.extend(R1[n:])
     if len(X2) > n:
@@ -84,14 +104,12 @@ X_all, Y_all_mask, Y_all_reg = interleave(
     X_synth, Y_synth_mask, Y_synth_reg
 )
 
-# ── 5) SPLIT TRAIN / VALID ——————————————————————————————————————————————
 x_train, x_val, y_train_mask, y_val_mask, y_train_reg, y_val_reg = \
     train_test_split(
         X_all, Y_all_mask, Y_all_reg,
         test_size=0.1, shuffle=True, random_state=seed
     )
 
-# ── 6) AUGMENTATION ——————————————————————————————————————————————————————
 aug = albu.Compose([
     albu.HorizontalFlip(),
     albu.VerticalFlip(),
@@ -100,7 +118,10 @@ aug = albu.Compose([
 ])
 
 def augment_batch(X, M, R):
-    """Apply albumentations to images & masks; leave regression labels unchanged."""
+    """
+    Apply albumentations to images & masks
+    Leave regression labels unchanged.
+    """
     Xa, Ma, Ra = [], [], []
     for img, msk, reg in zip(X, M, R):
         a = aug(image=(img*255).astype(np.uint8),
@@ -113,14 +134,12 @@ def augment_batch(X, M, R):
              np.array(Ra, dtype=np.float32) )
 
 
-# ── 7) BUILD MODEL & LOAD PRETRAINED RAPUNet WEIGHTS —————————————————————————
 model = create_model(img_size, img_size, 3, 1, filters)
 
 if os.path.exists(pretrained_ckpt):
     model.load_weights(pretrained_ckpt, by_name=True, skip_mismatch=True)
     print('Loaded pretrained RAPUNet weights.')
 
-# ── CALLBACKS ─────────────────────────────────────────────────────────────────
 run_id = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 callbacks = [
     CSVLogger    (f'{log_root}/train_{run_id}.csv'),
@@ -133,8 +152,10 @@ callbacks = [
 ]
 
 
-# ── 8) PHASE 1: TRAIN REGRESSION HEAD ONLY ——————————————————————————————————
-# freeze everything except regression head
+""" 
+PHASE 1: TRAIN REGRESSION HEAD ONLY 
+Freeze everything except regression head
+"""
 for layer in model.layers:
     layer.trainable = 'regression_output' in layer.name
 
@@ -159,8 +180,11 @@ for epoch in range(epochs_phase1):
               callbacks=callbacks, verbose=1)
     gc.collect()
 
+"""
+PHASE 2: FINE-TUNE ENTIRE NETWORK 
+Freeze everything except regression head
+"""
 
-# ── 9) PHASE 2: FINE‑TUNE ENTIRE NETWORK ———————————————————————————————————
 for layer in model.layers:
     layer.trainable = True
 
