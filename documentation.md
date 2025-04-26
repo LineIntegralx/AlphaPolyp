@@ -61,7 +61,7 @@ In clinical workflow this eliminates the extra CT‑colonography step currently 
 
 ## Model architecture
 
-![RAPUNet diagram](https://github.com/images/model_architecture.png)
+![RAPUNet diagram](https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/model_architecture.png)
 
 * **Backbone:** RAPUNet encoder–decoder (MetaFormer CAFormer‑S18)  
 * **Skip‑connected aggregation** → segmentation head (sigmoid, Dice)  
