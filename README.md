@@ -14,7 +14,7 @@ The link below contains:
 
 # Docker: Building and Running
 
-## 1. General Instructions
+## General Instructions
 
 ### Build the Docker Image
 ```bash
@@ -39,7 +39,7 @@ sudo docker run
 ```
 
 
-## Overview
+# Overview
 ![RAPUNet diagram](https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/model_architecture.png)
 
 1. **Clone the Repository**:
@@ -68,7 +68,7 @@ sudo docker run
 
 
 ---
-## Usage
+# Usage
 
 1. **Upload an Image**
    - On the main page, click on the Browse Files button or drag and drop an endoscopy image into the upload area. 
@@ -91,9 +91,9 @@ sudo docker run
    - A PDF report containing the analysis result, highlighted image will be generated to be downloaded on your device.
 
 
-## 🏷️ Labeling System (Using Blender)
+# Labeling System (Using Blender)
 
-### 💡 Overview
+## Overview
 
 This labeling system is designed to automatically measure the **size** and **volume** of polyps inside the colon by analyzing 3D intersections between objects in `.obj` files. Given synthetic 3D models that contain both a colon and a polyp, the script:
 
@@ -105,7 +105,7 @@ This labeling system is designed to automatically measure the **size** and **vol
 
 ---
 
-### 🛠️ How to Run the Labeling Script
+## How to Run the Labeling Script
 
 To use this script, ensure you have [Blender](https://www.blender.org/download/) installed (tested with **Blender 3.x**) and that your `.obj` files are located inside the `data/sample_data/mesh` directory.
 
@@ -114,7 +114,7 @@ You can run the labeling in **one of two ways**:
 
 ---
 
-### 🟠 Option 1: Run Using the `.blend` File
+## Option 1: Run Using the `.blend` File
 
 1. Open **Blender**.
 2. Click **Open**, then select the file:  
@@ -124,7 +124,7 @@ You can run the labeling in **one of two ways**:
 
 ---
 
-### 🔵 Option 2: Run Using the Python Script Directly
+## Option 2: Run Using the Python Script Directly
 
 1. Open **Blender**.
 2. Go to the **Scripting** workspace.
@@ -134,7 +134,7 @@ You can run the labeling in **one of two ways**:
 
 ---
 
-### 📁 Output
+## Output
 
 The script will:
 - Process all `.obj` files in `data/sample_data/meshes/`
