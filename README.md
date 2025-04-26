@@ -5,10 +5,11 @@
 
 # Google Drive Link 
 The link below contains:
-- The full dataset in /extracted_folder/syth-colon https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/front.png
+- The full dataset in /extracted_folder/syth-colon 
 - The powerpoint presentation 
 - The demo 
 - The model's weights 
+
 <https://drive.google.com/drive/folders/1NARp2kYtM5-aD8gHWHypCNpK98rDFR7-?usp=sharing>
 
 # Docker: Building and Running
@@ -39,9 +40,7 @@ sudo docker run
 
 
 ## Overview
-![image](https://github.com/)
-
-
+![RAPUNet diagram](https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/model_architecture.png)
 
 1. **Clone the Repository**:
    ```bash
