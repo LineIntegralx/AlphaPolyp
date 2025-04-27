@@ -11,28 +11,58 @@ In clinical workflow this eliminates the extra CT‑colonography step currently 
 
 ## System Architecture & Data Flow
 
-### Front‑End
+The system architecture comprises the following components:
 
-- **Next.js** – Renders UI components, handles routing, and manages user interactions.
-- **Tailwind CSS** – Utility‑first CSS framework for styling and responsive design.
-- **Custom Components** – Built with React and **shadcn/ui** for modularity and reusability.
-- **TypeScript** – Ensures type safety and an improved developer experience.
+*   **Flask Web Application:** Handles user interface, image upload, result visualization, and communication with the Model API.
+*   **Model API:** Performs the core image processing tasks, including polyp segmentation and feature extraction.
+### Code Structure
+*   `app.py`: Contains the Flask application logic, including routing, image processing, and API communication.
+*   `templates/`: Contains HTML templates for the web interface.
+    *   `index.html`: Main page for image upload.
+    *   `result.html`: Displays the results of the polyp detection.
+    *   `about.html`: About page.
+*   `static/`: Contains static files such as images, CSS, and JavaScript.
+    *   `uploads/`: Temporarily stores uploaded images.
+    *   `results/`: Stores the visualization results.
+### Data Flow
 
-### Back‑End
+1.  **Image Upload:**
+    *   The user uploads an image through the web interface.
+2.  **Flask Application (Backend):**
+    *   Receives the uploaded image.
+    *   Generates a unique filename.
+    *   Saves the image temporarily to the `static/uploads` directory.
+    *   Sends the image to the Model API.
+3.  **Model API:**
+    *   Receives the image.
+    *   Processes the image for polyp segmentation.
+    *   Returns a JSON response containing:
+        *   `volume`: Volume of the detected polyp.
+        *   `dimensions`: Dimensions (x, y, z) of the detected polyp.
+        *   `segmentation`: Segmentation map of the polyp.
+        *   `processing_time`: Time taken for processing.
+4.  **Flask Application (Post-processing & Visualization):**
+    *   Receives the JSON response.
+    *   Extracts `volume`, `dimensions`, and `segmentation` data.
+    *   Calls the `visualize_results` function to:
+        *   Read the original image.
+        *   Overlay the segmentation map.
+        *   Combine the original image and overlay.
+    *   Saves the visualization to the `static/results` directory.
+5.  **Results Display:**
+    *   Renders the `result.html` template.
+    *   Displays:
+        *   Original image.
+        *   Segmentation visualization.
+        *   Polyp `volume` and `dimensions`.
+        *   `processing_time`.
 
-- **Flask** – Serves as the main REST API server, handling requests and responses.
-- **TensorFlow / Keras** – Runs the custom CNN model for polyp detection.
-- **Model Weights** – Stored in `alphapolyp_optimized_model_3500cases.h5`.
-- **Utilities** – Pre‑processing and post‑processing functions for image analysis.
-- **REST API** – Exposes endpoints for image upload, analysis, and model information.
+## Configuration
 
-### Data Flow
+The following environment variables can be configured:
 
-1. **Image Upload** – User uploads an image via the frontend UI.
-2. **API Request** – Frontend sends the image to the backend `/api/analyze` endpoint.
-3. **Processing** – Backend preprocesses the image, runs inference with the ML model, and post‑processes the results.
-4. **Response** – Backend returns analysis results (detected polyps, volume estimation and dimensions) to the frontend.
-5. **Display** – Frontend visualizes results, highlights polyps, and provides user feedback.
+*   `MODEL_API_URL`: The URL of the Model API. Defaults to `http://model:5001`.
+*   `PORT`: The port on which the Flask application runs. Defaults to `5000`.
 
 ---
 

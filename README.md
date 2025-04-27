@@ -14,58 +14,58 @@ The link below contains:
 
 # Docker: Building and Running
 
-## General Instructions
+There are two options to run AlphaPolyp: building from the provided Dockerfile and model weights, or pulling pre-built Docker images.
 
-### Build the Docker Image
-```bash
-docker build  
-```
+## Option 1: Building from Source and Local Model Weights
 
-### Run the Docker Container
-```bash
-docker run 
-```
+1.  **Clone the Repository:**
 
----
+    ```bash
+    git clone https://github.com/LineIntegralx/AlphaPolyp.git
+    cd AlphaPolyp
+    ```
 
-### Build the Docker Image
-```bash
-sudo docker build 
-```
+2.  **Download Model Weights:**
 
-### Run the Docker Container
-```bash
-sudo docker run 
-```
+    *   Download the model weights from the Google Drive link provided in the [README](https://github.com/LineIntegralx/AlphaPolyp/blob/main/README.md).
+    *   Place the downloaded model weights into the `model` folder within the cloned repository.
 
+3.  **Build and Run with Docker Compose:**
 
-# Overview
-![RAPUNet diagram](https://github.com/LineIntegralx/AlphaPolyp/blob/main/images/model_architecture.png)
+    ```bash
+    docker compose up --build
+    ```
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/yourrepo.git
-   cd yourrepo
-   ```
+    This command builds the Docker images and starts the containers.
 
-2. **Install Dependencies**:
-   It’s recommended to use a virtual environment:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Option 2: Pulling Pre-built Docker Images
 
-   Required Python packages include:
-   - `tensorflow`
-   - `tensorflow-addons`
-   - `keras-cv-attention-models`
-   - `albumentations`
-   - `OpenAI` 
-   - `numpy`
-   - `opencv`
-   - `scikit-learn`
-   - `tqdm`
-   - `pillow ` 
+1.  **Clone the Repository:**
 
+    ```bash
+    git clone https://github.com/LineIntegralx/AlphaPolyp.git
+    cd AlphaPolyp
+    ```
+
+2.  **Docker Login:**
+
+    *   In your terminal, run `docker login` and log in to your Docker account.
+    *   Alternatively, open the terminal in Docker Desktop, which handles the login automatically.
+
+3.  **Pull Docker Images:**
+
+    ```bash
+    docker pull lineintegral/alphapolyp-model:latest
+    docker pull lineintegral/alphapolyp-flask:latest
+    ```
+
+4.  **Run with Docker Compose:**
+
+    ```bash
+    docker compose up -d
+    ```
+
+    This command starts the containers in detached mode.
 
 ---
 # Usage
