@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: ./flask-app
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask-app/static/uploads:/app/static/uploads
+      - ./flask-app/static/results:/app/static/results
+    environment:
+      - MODEL_API_URL=http://model:5001
+    depends_on:
+      - model
+    restart: unless-stopped
+
+  model:
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./model:/app
+    restart: unless-stopped
+    command: gunicorn --timeout 300 --bind 0.0.0.0:5001 app:app
+
+volumes:
+  uploads:
+  results:
