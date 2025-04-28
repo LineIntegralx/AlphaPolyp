@@ -16,8 +16,6 @@ The link below contains:
 
 There are two options to run AlphaPolyp: building from the provided Dockerfile and model weights, or pulling pre-built Docker images.
 
-## Option 1: Building from Source and Local Model Weights
-
 1.  **Clone the Repository:**
 
     ```bash
@@ -27,8 +25,10 @@ There are two options to run AlphaPolyp: building from the provided Dockerfile a
 
 2.  **Download Model Weights:**
 
-    *   Download the model weights from the Google Drive link provided in the [README](https://github.com/LineIntegralx/AlphaPolyp/blob/main/README.md).
+    *   Download the model weights from the [Google Drive link ](https://drive.google.com/drive/folders/1NARp2kYtM5-aD8gHWHypCNpK98rDFR7-?usp=sharing).
     *   Place the downloaded model weights into the `model` folder within the cloned repository.
+      
+## Option 1: Building from Source and Local Model Weights
 
 3.  **Build and Run with Docker Compose:**
 
@@ -40,32 +40,24 @@ There are two options to run AlphaPolyp: building from the provided Dockerfile a
 
 ## Option 2: Pulling Pre-built Docker Images
 
-1.  **Clone the Repository:**
-
-    ```bash
-    git clone https://github.com/LineIntegralx/AlphaPolyp.git
-    cd AlphaPolyp
-    ```
-
-2.  **Docker Login:**
+3.  **Docker Login:**
 
     *   In your terminal, run `docker login` and log in to your Docker account.
-    *   Alternatively, open the terminal in Docker Desktop, which handles the login automatically.
 
-3.  **Pull Docker Images:**
+4.  **Pull Docker Images:**
 
     ```bash
     docker pull lineintegral/alphapolyp-model:latest
     docker pull lineintegral/alphapolyp-flask:latest
     ```
 
-4.  **Run with Docker Compose:**
+5.  **Run with Docker Compose:**
 
     ```bash
-    docker compose up -d
+    docker compose up
     ```
 
-    This command starts the containers in detached mode.
+    This command starts the containers in the foreground and streams their logs to your terminal.
 
 ---
 # Usage
